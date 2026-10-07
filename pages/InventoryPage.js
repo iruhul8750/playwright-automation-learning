@@ -7,7 +7,7 @@ class InventoryPage{
         this.productItems = page.locator('.inventory_item');
         this.productNames = page.locator('.inventory_item_name');
         this.productPrices = page.locator('.inventory_item_price');
-        this.addToCartButtons = page.getByRole('button', {name: '/Add to cart/i'});
+        this.addToCartButtons = page.getByText('Add to cart');
 
 
     }

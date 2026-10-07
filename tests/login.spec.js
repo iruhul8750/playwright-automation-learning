@@ -51,27 +51,18 @@ test.describe('Login Tests', () => {
             'secret_sauce'
         );
 
-        await expect(
-            page.getByText(
-                'Sorry, this user has been locked out.'
-            )
-        ).toBeVisible();
-    });
+        await expect(page.getByText('Sorry, this user has been locked out.')).toBeVisible();});
+        
 
     test('problem user', async ({page}) => {
 
-        const LoginPage = new LoginPage(page);
+        const loginPage = new LoginPage(page);
 
         await loginPage.open();
-        await loginPage.login(
-            'problem_user',
-            secret_sauce            
-        );
+        await loginPage.login('problem_user','secret_sauce');
 
         await expect(page).toHaveURL(/inventory/);
-        await expect(
-            page.getByText('Products')
-        ).toBeVisible();
+        await expect( page.getByText('Products')).toBeVisible();
     })
 
 });
