@@ -17,6 +17,6 @@ exports.test = base.test.extend({
         await use(page);
 
     }
-})
+});
 
 exports.expect = base.expect;

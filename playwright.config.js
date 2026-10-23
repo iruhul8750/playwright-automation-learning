@@ -23,7 +23,9 @@ module.exports = defineConfig({
         launchOptions: {
             slowMo: 500,
             args: ['--start-maximized']
-        }
+        },
+
+        testIdAttribute: 'data-test'
     },
 
     projects: [

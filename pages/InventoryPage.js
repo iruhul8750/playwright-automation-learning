@@ -7,23 +7,38 @@ class InventoryPage{
         this.productNames = page.locator('.inventory_item_name');
         this.productPrices = page.locator('.inventory_item_price');
         this.addToCartButtons = page.getByRole('button', {name: 'Add to cart'});
-        this.cartButton = page.locator('.shopping_cart_link');
-        this.cartBadge = page.locator('.shopping_cart_link');
+        this.cartLink = page.locator('.shopping_cart_link');
+        this.cartBadge = page.locator('.shopping_cart_badge');
         this.removeButtons = page.getByRole('button', {name: 'Remove'});
+        this.continueShopping = page.getByRole('button', {name: 'Continue Shopping'});
+        this.checkout = page.getByRole('button', {name: 'Checkout'});
+        this.continue = page.getByRole('button', {name: 'Continue'});
     }
 
     async verifyInventoryPage() {
         await this.productsHeading.isVisible();
     }
 
-    // Locatory chaining method
-    async addProductToCart(productName){
-        await this.productItems.filter({ hasText: productName}).getByRole('button', {name: 'Add to cart'}).click();
+    getProduct(productName){
+        return this.productItems.filter({hasText: productName});
     }
 
-    getProduct(product){
-        return this.productItems.filter({hasText: product});
+    // Locator chaining method
+    async addProductToCart(productName){
+        const product = this.getProduct(productName);
+
+        await product.getByRole('button', {name: 'Add to cart'}).click();
     }
+
+    getCartProduct(productName){
+        return this.page.locator('.cart_item').filter({hasText: productName});
+    }
+
+    async removeProduct(productName){
+        const product = this.getCartProduct(productName);
+        await product.getByRole('button', {name: 'Remove'}).click();
+    }
+   
 }
 
 module.exports = InventoryPage;
